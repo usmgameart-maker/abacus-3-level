@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f5ef">
+  <meta name="description" content="Тренируй память и ментальный счёт: найди пары чисел и абакусов. Три уровня сложности от Think & Grow.">
+  <title>Найди пару · Think & Grow</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="app-header">
+      <img class="logo" src="assets/images/img 1.png" alt="Think & Grow">
+      <span class="header-note"><span class="status-dot"></span> Маленькие шаги. Большие открытия.</span>
+      <span class="subject-tag">Ментальная арифметика</span>
+    </header>
+    <main class="container">
+      <section id="menu" aria-labelledby="menuTitle">
+        <div class="hero">
+          <div class="hero-copy">
+            <span class="eyebrow">ИГРАЕМ И РАЗВИВАЕМСЯ</span>
+            <h1 id="menuTitle">Найди пару:<br><span>число и абакус</span></h1>
+            <p class="hero-description">Немного внимания, немного памяти —<br class="desktop-break"> и все пары найдутся. Попробуем?</p>
+            <div class="feature-tags"><span>✦ Тренируем память</span><span>✦ Учимся считать</span></div>
+          </div>
+          <div class="hero-art">
+            <span class="art-spark spark-one" aria-hidden="true">✦</span>
+            <img class="picture" src="assets/images/img 2.jpg" alt="Разноцветный абакус для тренировки счёта">
+            <span class="art-caption">Считай. Запоминай. Находи.</span>
+            <span class="art-spark spark-two" aria-hidden="true">✧</span>
+          </div>
+        </div>
+        <div class="section-heading"><h2>С чего начнём?</h2><span>Выбери свой уровень</span></div>
+        <div class="level-buttons">
+          <button class="level-card lvl1" onclick="selectLevel(1)"><span class="level-icon" aria-hidden="true">Ⅰ</span><span class="level-copy"><strong>Первые шаги</strong><span>Уровень 1 · числа 1–9</span><span id="levelRecord1" class="level-record">Пока без побед — всё впереди!</span></span><span class="level-arrow" aria-hidden="true">↗</span></button>
+          <button class="level-card lvl2" onclick="selectLevel(2)"><span class="level-icon" aria-hidden="true">Ⅱ</span><span class="level-copy"><strong>Новый вызов</strong><span>Уровень 2 · числа 10–99</span><span id="levelRecord2" class="level-record">Пока без побед — всё впереди!</span></span><span class="level-arrow" aria-hidden="true">↗</span></button>
+          <button class="level-card lvl3" onclick="selectLevel(3)"><span class="level-icon" aria-hidden="true">Ⅲ</span><span class="level-copy"><strong>Мастер счёта</strong><span>Уровень 3 · числа 100–999</span><span id="levelRecord3" class="level-record">Пока без побед — всё впереди!</span></span><span class="level-arrow" aria-hidden="true">↗</span></button>
+        </div>
+        <section class="personal-progress" aria-labelledby="progressTitle">
+          <div class="section-heading"><h2 id="progressTitle">Твои открытия</h2><span>Побед: <strong id="totalWins">0</strong> · Наград: <strong id="achievementCount">0 / 3</strong></span></div>
+          <ul id="achievements" class="achievements"></ul>
+          <p id="saveNotice" class="save-notice">Результаты сохраняются в этом браузере.</p>
+        </section>
+        <aside class="how-to"><span class="tip-symbol" aria-hidden="true">?</span><p><strong>Как играть?</strong> Запомни карточки за 5 секунд. Затем открывай по две: число и абакус с таким же значением. Найди все 6 пар!</p></aside>
+      </section>
+      <section id="gameScreen" style="display:none;" aria-labelledby="gameTitle">
+        <div class="game-heading"><div><span class="eyebrow" id="levelTitle">Уровень 1</span><h1 id="gameTitle">Найди пару</h1><p class="game-subtitle">Число + абакус с таким же значением</p></div><button class="button button-quiet" onclick="startGame()"><span aria-hidden="true">↻</span> Заново</button></div>
+        <div class="game-dashboard">
+          <div class="phase"><span class="phase-icon" aria-hidden="true">✦</span><span id="phaseText" role="status">Запоминай карточки</span><span id="previewCount" class="countdown">5 с</span></div>
+          <div class="progress-summary"><span>Найдено пар <strong id="pairCount">0 / 6</strong></span><div id="pairProgress" class="progress-track" role="progressbar" aria-label="Найденные пары" aria-valuemin="0" aria-valuemax="6" aria-valuenow="0"><span id="progressFill"></span></div></div>
+        </div>
+        <p class="round-note">Ходы: <strong id="moveCount">0</strong><span>Один ход — две открытые карточки</span></p>
+        <div class="game-wrapper">
+          <div id="game" aria-label="Игровое поле"></div>
+          <div id="resultContainer" role="status"><span class="win-icon" aria-hidden="true">★</span><div id="result"></div><p id="roundResult"></p><div id="newAchievements" class="new-achievements"></div><p id="resultSaveNotice" class="save-notice"></p><button class="button button-primary" id="restart" onclick="startGame()">Играть ещё раз <span aria-hidden="true">↻</span></button><button class="button button-quiet result-menu" onclick="showMenu()">К уровням</button></div>
+        </div>
+        <nav class="controls" aria-label="Навигация по уровням"><button class="button button-quiet" id="back" onclick="changeLevel(-1)">← Меню</button><span class="level-dots" aria-label="Текущий уровень"><span></span><span></span><span></span></span><button class="button button-primary" id="next" onclick="changeLevel(1)">Вперёд →</button></nav>
+      </section>
+    </main>
+    <footer class="app-footer"><span>У каждого открытия есть начало</span><span class="footer-flower" aria-hidden="true">✳</span><span>Растём вместе с Think & Grow</span></footer>
+  </div>
+  <script src="assets/progress.js"></script>
+  <script src="assets/game.js"></script>
+</body>
+</html>
